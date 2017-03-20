@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>分享到</title>
+    <style>
+        #content{width:200px;height:300px;background: #ffec75;position: absolute;left:-200px;}
+        #content span{width:20px;height:60px;line-height20px;text-align:center;background: #ff1822;position:absolute;left:200px;top:120px;}
+    </style>
+    <script>
+        window.onload=function(){
+                var oDiv=document.getElementById('content');
+                var oSpan=oDiv.getElementsByTagName('span')[0];
+                oDiv.onmouseover=function(){
+                    startMove(0);
+                };
+            oDiv.onmouseout=function(){
+                startMove(-200);
+            };
+        };
+        var timer=null;
+        function startMove(end){
+
+            clearInterval(timer);
+            var oDiv=document.getElementById('content');
+            timer=setInterval(function(){
+                var speed=0;
+                if(oDiv.offsetLeft>end){
+                    speed=-10;
+                }
+                else{
+                    speed=10;
+                }
+                if(oDiv.offsetLeft==end){
+                    clearInterval(timer);
+                }
+                else{
+                    oDiv.style.left=oDiv.offsetLeft+speed+'px';
+                }
+
+            },30);
+        }
+    </script>
+</head>
+<body>
+        <div id="content">
+            <span>分享到</span>
+        </div>
+</body>
+</html>

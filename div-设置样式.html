@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>设置样式</title>
+    <script src="move-p.js"></script>
+    <style>
+        #div1{width:100px;height:100px;background: #ec0354;filter:alpha(opacity:30);opacity: 0.3;}
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById('div1');
+            oDiv.onmouseover=function(){
+                startMove(oDiv,{'width':'103','height':'200',opacity:100});
+
+                //alert(1);
+            };
+            oDiv.onmouseout=function(){
+                startMove(oDiv,{'width':'100','height':'100','opacity':30});
+
+                //alert(1);
+            };
+        };
+
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

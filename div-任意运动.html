@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>任意运动</title>
+    <style>
+        div{width:100px;height:100px;background: #1dffe3;margin-top: 20px;border:1px solid #ff060a;}
+    </style>
+    <script src="getStyle.js"></script>
+    <script>
+        window.onload=function(){
+            var aDiv=document.getElementsByTagName('div');
+            for(var i=0;i<aDiv.length;i++){
+                aDiv[i].timer=null;
+            }
+            aDiv[0].onmouseover=function(){
+                startMove(this,'height',300);
+
+            };
+            aDiv[1].onclick=function(){
+                startMove(this,'borderWidth',300);
+
+            };
+            aDiv[2].onclick=function(){
+                startMove(this,'width',300);
+
+            };
+        };
+        function startMove(obj,attr,end){
+                clearInterval(obj.timer);
+                obj.timer=setInterval(function(){
+                var cur=parseInt(getStyle(obj,attr));
+                var speed=(end-cur)/8;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                  //  document.title=cur+'----'+speed;
+                if(end==cur){
+                    clearInterval(obj.timer);
+                }
+                else{
+                    //cur+=speed;
+                    obj.style[attr]=cur+speed+'px';
+
+                }
+            },30);
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

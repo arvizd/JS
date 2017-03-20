@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>点击div运动</title>
+    <style>
+        #div1{width:100px;height:100px;background: #19fffb;position: absolute;left:0;top:30px;}
+    </style>
+    <script>
+
+        var timer=null;
+
+        function startMove(end){
+
+
+
+            clearInterval(timer);
+            timer=setInterval(function(){
+                var oDiv=document.getElementById('div1');
+                var  ispeed=8;
+                if(Math.abs(oDiv.offsetLeft-end)<ispeed){//是否到达终点
+                    clearInterval(timer);
+                    oDiv.style.left=end+'px';
+                    //alert(1);
+                }
+                else{
+                    oDiv.style.left=oDiv.offsetLeft+ispeed+'px';
+                }
+
+            },30);
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="开始运动" onclick="startMove(300)">
+<div id="div1"></div>
+<span style="width:1px;height: 300px;position: absolute;left:300px;background: #000;"></span>
+</body>
+</html>

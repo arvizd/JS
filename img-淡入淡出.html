@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>图片淡入淡出</title>
+    <style>
+        #img1{filter:alpha(opacity:30);opacity: 0.3;}
+    </style>
+    <script>
+        var timer=null;
+        var alpha=100;
+        window.onload=function(){
+            var oImg=document.getElementById('img1');
+            oImg.onmouseover=function(){
+                startMove(100);
+            };
+            oImg.onmouseout=function(){
+                startMove(30);
+            };
+        };
+          function startMove(end){
+            var oImg=document.getElementById('img1');
+            clearInterval(timer);
+            timer=setInterval(function(){
+                var speed=0;
+                if(alpha<end){
+                    speed=1;
+                }
+                else{
+                    speed=-1;
+                }
+
+                alpha=alpha+speed;
+                document.title=alpha;
+                if(alpha==end){
+                    clearInterval(timer);
+                }
+                else{
+                    oImg.style.filter='alpha(opacity:'+alpha+')';
+                    oImg.style.opacity=alpha/100;
+                   // document.title=alpha;
+                }
+            },30);
+        }
+    </script>
+</head>
+<body>
+<img src="./images/6.jpg" alt="" id="img1">
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>从中心放大</title>
+    <style>
+        #div1{width:100px;height:100px;background: #ec2814;position: absolute;top:200px;left:200px;margin:0;}
+
+    </style>
+    <script src="move-p.js"></script>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById('div1');
+            oDiv.onmouseover=function(){
+                //alert(1);
+                startMove(oDiv,{height:200,width:200,marginLeft:-50,marginTop:-50});
+            };
+            oDiv.onmouseout=function(){
+                //alert(1);
+                startMove(oDiv,{height:100,width:100,marginLeft:0,marginTop:0});
+            };
+        };
+
+    </script>
+</head>
+<body>
+    <!--<div id="div2"></div>-->
+    <div id="div1"></div>
+</body>
+</html>

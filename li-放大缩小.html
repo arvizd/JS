@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>放大缩小</title>
+    <style>
+        *{margin:0;padding: 0;}
+        #pos{width:366px;margin:0 auto;position: relative; }
+        #pos li{width:100px;height:100px;border:1px solid #ecc078;background: #ecd9e4;list-style: none;float: left;margin: 10px;z-index: 1;}
+    </style>
+    <script src="move-p.js"></script>
+    <script>
+        window.onload=function(){
+            var oUl=document.getElementById('pos');
+            var aLi=oUl.getElementsByTagName('li');
+            var i=0;
+            var iMinIndex=2;
+            for( i=0;i<aLi.length;i++){
+                aLi[i].innerHTML='Left:'+aLi[i].offsetLeft+',Top'+aLi[i].offsetTop;
+                aLi[i].style.top=aLi[i].offsetTop+'px';
+                aLi[i].style.left=aLi[i].offsetLeft+'px';
+
+            }
+            for(i=0;i<aLi.length;i++){
+                aLi[i].style.position='absolute';
+                aLi[i].style.margin='0';
+            }
+            for( var j=0;j<aLi.length;j++){
+                aLi[j].onmouseover=function(){
+               //     alert(1);
+//                    document.title=iMinIndex;
+                    this.style.zIndex=iMinIndex++;
+                    startMove(this,{height:200,width:200,marginLeft:-50,marginTop:-50});
+                    document.title=iMinIndex;
+                };
+               aLi[j].onmouseout=function(){
+                    //alert(1);
+                    startMove(this,{height:100,width:100,marginLeft:0,marginTop:0});
+                };
+            }
+        };
+
+    </script>
+</head>
+<body>
+    <ul id="pos">
+        <li><img src="../images/ex3-2/1.jpg" alt=""></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>无缝滚动</title>
+    <style>
+        *{margin:0;padding: 0;}
+        #move{position: relative;border: 1px solid #ecdc97;width:680px;height:132px;margin:20px auto;overflow: hidden;}
+        #move ul{position: absolute;left:0;}
+        #move ul li{list-style: none;float: left;padding: 10px;}
+        #move ul li img{width:150px;height:114px;}
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById('move');
+            var oUl=oDiv.getElementsByTagName('ul')[0];
+            var aLi=oUl.getElementsByTagName('li');
+            var aDir=document.getElementsByTagName('a');
+            var speed=5;
+            var timer=null;
+            oUl.innerHTML+=oUl.innerHTML;
+            oUl.style.width=aLi.length*aLi[0].offsetWidth+'px';
+            function move(){
+
+                if(oUl.offsetLeft<-oUl.offsetWidth/2){
+                    oUl.style.left=0;
+                }
+                else if(oUl.offsetLeft>0){
+                    oUl.style.left=-oUl.offsetWidth/2+'px';
+                }
+                oUl.style.left=oUl.offsetLeft+speed+'px';
+
+            }
+            timer=setInterval(move,20);
+            oDiv.onmouseover=function(){
+                clearInterval(timer);
+            };
+            oDiv.onmouseout=function(){
+                timer=setInterval(move,20);
+            };
+            aDir[0].onclick=function(){
+                speed=-5;
+            };
+            aDir[1].onclick=function(){
+                speed=5;
+            };
+
+        };
+
+    </script>
+</head>
+<body>
+<a id="left" href="javascript:;">&lt;</a><a id="right"  href="javascript:;">&gt;</a>
+    <div id="move">
+        <ul>
+            <li><img src="../images/ex3-2/1.jpg"  alt=""></li>
+            <li><img src="../images/ex3-2/2.jpg"  alt=""></li>
+            <li><img src="../images/ex3-2/3.jpg" alt=""></li>
+            <li><img src="../images/ex3-2/4.jpg"  alt=""></li>
+        </ul>
+    </div>
+</body>
+</html>

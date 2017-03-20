@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>新浪</title>
+    <style>
+        *{margin:0;padding:0;}
+        #ul1{width:300px;height:300px;border:1px solid #ecd9b7;margin: 10px auto;}
+        #ul1 div{list-style: none;border-bottom: 1px dashed #dbcdec;padding: 2px;overflow: hidden;filter:alpha(opacity:0);opacity: 0;}
+    </style>
+    <script src="move-p.js"></script>
+    <script>
+        window.onload=function(){
+            var oTex=document.getElementById('txt1');
+            var oBtn=document.getElementById('btn1');
+            var oUl=document.getElementById('ul1');
+
+
+                oBtn.onclick=function(){
+                    if(oTex.value==''){
+                        oTex.focus();
+                    }
+                    else {
+                        var oLi = document.createElement('div');
+                        //  alert(oLi.);
+                        var aLi = oUl.getElementsByTagName('div');
+                        //   alert(aLi.length);
+                        oLi.innerHTML = oTex.value;
+                        oTex.value = '';
+                        if (aLi.length) {
+                            oUl.insertBefore(oLi, aLi[0]);
+                        }
+                        else {
+                            oUl.appendChild(oLi);
+                        }
+                        var iHeight=oLi.offsetHeight;
+                        oLi.style.height=0;
+                        startMove(oLi,{height:iHeight},function(){
+                            startMove(oLi,{opacity:100})
+                        });
+                    }
+                };
+        };
+    </script>
+</head>
+<body>
+<textarea  id="txt1" cols="40" rows="10"></textarea><br/>
+<input type="button" id="btn1" value="发布"/>
+<div id="ul1">
+    <!--<li>dsafasfasfas </li>-->
+</div>
+</body>
+</html>

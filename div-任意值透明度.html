@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>任意值透明度</title>
+    <style>
+        #div1{width:100px;height:100px;background: #76ec16;filter:alpha(opacity:30);opacity:0.3;}
+    </style>
+    <script src="getStyle.js"></script>
+    <script>
+        window.onload=function(){
+            var aDiv=document.getElementsByTagName('div');
+            for(var i=0;i<aDiv.length;i++){
+                aDiv[i].timer=null;
+            }
+            aDiv[0].onmouseover=function(){
+                startMove(this,'opacity',100);
+
+            };
+            aDiv[0].onmouseout=function(){
+                startMove(this,'opacity',30);
+
+            };
+
+        };
+        function startMove(obj,attr,end){
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function(){
+                var cur=0;
+                if(attr=='opacity'){
+                    cur=parseInt(parseFloat(getStyle(obj,attr))*100);
+                }
+                else{
+                    cur=parseInt(getStyle(obj,attr));
+                }
+                var speed=(end-cur)/8;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                //  document.title=cur+'----'+speed;
+                if(end==cur){
+                    clearInterval(obj.timer);
+                }
+                else{
+                    //cur+=speed;
+                    if(attr=='opacity'){
+                        obj.style.filter='alpha(opacity:'+(cur+speed)+')';
+                        obj.style[attr]=(cur+speed)/100;
+                    }
+                    else{
+                        obj.style[attr]=cur+speed+'px';
+                    }
+
+
+                }
+            },30);
+        }
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

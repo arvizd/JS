@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性菜单</title>
+    <style>
+        *{margin:0;padding: 0;}
+        li {list-style: none;}
+        ul{width:400px;height:30px;position: relative;margin:100px auto 0;}
+        li{float: left;width:98px;height:28px;line-height: 28px;text-align:center;border:1px solid #ccc;position: relative;cursor: pointer;z-index: 2;}
+        .bg{width:100px;height:5px;overflow: hidden;background: #ec7257;position: absolute;top:24px;left:0;z-index:1;border: none;}
+    </style>
+    <script>
+        window.onload=function(){
+            var oUl=document.getElementById('ul1');
+            var aLi=oUl.getElementsByTagName('li');
+            var oBg=aLi[aLi.length-1];
+            for(var i=0;i<aLi.length-1;i++){
+                //aLi[i].timer=null;
+                aLi[i].onmouseover=function(){
+                    startMove(oBg,this.offsetLeft);
+                };
+            }
+        };
+        var speed=0;
+        var left=0;
+        function startMove(obj,end){
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function(){
+                speed+=(end-obj.offsetLeft)/5;
+                speed*=0.7;
+                left+=speed;
+                if(Math.abs(speed)<1 && Math.abs(end-left)<1){
+                   clearInterval(obj.timer);
+                    obj.style.left=end+'px';
+                }
+                else{
+                    obj.style.left=left+'px';
+                }
+
+                document.title=obj.offsetLeft+'|'+end;
+            },30);
+        }
+    </script>
+</head>
+<body>
+    <ul id="ul1">
+        <li>首页</li>
+        <li>关于我们</li>
+        <li>产品</li>
+        <li>联系方式</li>
+        <li class="bg"></li>
+    </ul>
+</body>
+</html>
